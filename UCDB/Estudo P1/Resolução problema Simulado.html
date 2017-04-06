@@ -50,11 +50,10 @@
         this.el = document.getElementById("pedidos");
         this.itemEditar = -1;
         this.total = function () {
-            var tot = 0;
+        var tot = 0;
 
             for (i = 0; i < this.valores.length; i++) {
                 tot += this.valores[i];
-
             }
 
             console.log(tot);
@@ -118,6 +117,7 @@
            this.itemEditar = item;
            var produto = this.pedidos[item];
            var valor = this.valores[item];
+
 
            if (produto && valor) {
                var el = document.getElementById("add-produto");
