@@ -1,0 +1,28 @@
+<html>
+
+    <script>
+    
+        var total = 0;
+		var indice = 0;
+		var item_nome = "";
+		var item_valor = "";
+    
+        function insere(){
+ 				item_nome = document.getElementById("item").value;
+ 				item_valor = Number(document.getElementById("valor").value);
+ 				total = parseFloat(total)+parseFloat(item_valor);
+ 
+ 				document.getElementById("total_pedido").innerText = "R$ "+total;
+ 
+ 				document.getElementById("valor").value = "";
+ 				document.getElementById("item").value = "";
+ 
+ 				document.getElementById("resultado_pedido").innerHTML += '<div id="'+indice+'"><input class="input" type="text" id="nome_'+indice+'" value="'+item_nome+'" readonly="readonly"> <input class="input" type="text" id="valor_'+indice+'" value="'+item_valor+'" readonly="readonly"> <input type="button" class="btn_edit"  value="E" onclick="edita('+indice+')"> <input type="button" class="btn_delete" value="X" onclick="exclui('+indice+')"></div> ';
+ 
+ 				indice++;				
+ 			}
+
+
+    </script>
+
+</html>
