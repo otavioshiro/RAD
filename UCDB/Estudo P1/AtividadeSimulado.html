@@ -1,0 +1,99 @@
+<html>
+	<head>
+ 		<title>Exercicio 30/03/17</title>
+ 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+ 		<script language="javascript">
+ 			var total = 0;
+ 			var indice = 0;
+ 
+ 			var item_nome = "";
+ 			var item_valor = "";
+ 
+ 			var id_sendo_editado = "";
+ 
+ 			function insere(){
+ 				item_nome = document.getElementById("item").value;
+ 				item_valor = Number(document.getElementById("valor").value);
+ 				total = parseFloat(total)+parseFloat(item_valor);
+ 
+ 				document.getElementById("total_pedido").innerText = "R$ "+total;
+ 
+ 				document.getElementById("valor").value = "";
+ 				document.getElementById("item").value = "";
+ 
+ 				document.getElementById("resultado_pedido").innerHTML += '<div id="'+indice+'"><input class="input" type="text" id="nome_'+indice+'" value="'+item_nome+'" readonly="readonly"> <input class="input" type="text" id="valor_'+indice+'" value="'+item_valor+'" readonly="readonly"> <input type="button" class="btn_edit"  value="E" onclick="edita('+indice+')"> <input type="button" class="btn_delete" value="X" onclick="exclui('+indice+')"></div> ';
+ 
+ 				indice++;				
+ 			}
+ 
+ 			function edita(id){
+ 				id_sendo_editado = id;
+ 				document.getElementById("item").value = document.getElementById("nome_"+id_sendo_editado).value;
+ 				document.getElementById("valor").value = document.getElementById("valor_"+id_sendo_editado).value;
+ 				
+ 				document.getElementById("btn_inserir").style.display= "none";
+     			document.getElementById("btns_edits").style.display = "block";
+ 			}
+ 
+ 			function cancela_alteracao(){
+ 				document.getElementById("valor").value = "";
+ 				document.getElementById("item").value = "";
+ 
+ 				document.getElementById("btns_edits").style.display = "none";
+ 				document.getElementById("btn_inserir").style.display= "block";
+ 				
+ 				id_sendo_editado = "";
+ 			}
+ 
+ 			function exclui(id){
+ 				total = parseFloat(total)-parseFloat(document.getElementById("valor_"+id).value); 
+ 				document.getElementById("total_pedido").innerText = "R$ "+total;
+ 				var el = document.getElementById(id);
+ 				el.parentNode.removeChild( el );
+ 			}
+ 
+ 			function confirma_alteracao(){
+ 				total = parseFloat(total) - parseFloat(document.getElementById("valor_"+id_sendo_editado).value);
+ 				total = parseFloat(total) + parseFloat(document.getElementById("valor").value);
+ 
+ 				document.getElementById("total_pedido").innerText = "R$ "+total;
+ 
+ 				document.getElementById("nome_"+id_sendo_editado).value = document.getElementById("item").value;
+ 				document.getElementById("valor_"+id_sendo_editado).value = document.getElementById("valor").value;
+ 
+ 				cancela_alteracao();
+ 			}
+ 		</script>
+ 		<style type="text/css">
+ 			.input{
+ 				border: none;
+ 			}
+ 			.btn_edit{
+ 				background-color: blue;
+ 				color: white;
+ 			}
+ 			.btn_delete{
+ 				background-color: red;
+ 				color: white;
+ 			}
+ 		</style>
+ 	</head>
+ 	<body>
+ 		<div style="float: left; margin-left: 10px;"> <input placeholder="Item" type="text" id="item" value=""> </div>
+ 
+ 		<div style="float: left; margin-left: 10px;"> <input placeholder="Valor" type="text" id="valor" value=""> </div>		
+ 
+ 		<div style="float: left; margin-left: 10px;" id="btn_inserir"> <input type="button" value="+" onclick="insere()"> </div>
+ 
+ 		<div style="float: left; margin-left: 10px; display: none;" id="btns_edits"> 
+ 			<input class="btn_edit" type="button" value="Salvar" onclick="confirma_alteracao()">
+ 			<input class="btn_delete" type="button" value="Cancelar" onclick="cancela_alteracao()"> 
+ 		</div>
+ 
+ 		<div style="width: 100%; float: left; margin-left: 10px; margin-top: 20px;"> Lista Pedidos: </div>
+ 
+ 		<div style="width: 100%; float: left; margin-left: 10px; margin-top: 30px; margin-bottom: 30px;" id="resultado_pedido"></div>
+ 
+ 		<div style="width: 100%; float: left; margin-left: 10px; margin-top: 20px;" id="total_pedido"> - </div>
+ 	</body>
+ </html>
